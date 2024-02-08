@@ -5,7 +5,6 @@ import { ConfigModule } from '@nestjs/config'; // Importa ConfigModule si lo nec
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { FacebookStrategy } from "./facebook.strategy";
-import { InstagramStrategy } from "./instagram.strategy";
 
 @Module({
   imports: [   
@@ -13,6 +12,6 @@ import { InstagramStrategy } from "./instagram.strategy";
       ConfigModule.forRoot(),
 ],
   controllers: [AppController],
-  providers: [AppService, FacebookStrategy, InstagramStrategy],
+  providers: [AppService, FacebookStrategy],
 })
 export class AppModule {}
