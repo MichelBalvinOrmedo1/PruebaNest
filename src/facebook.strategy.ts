@@ -6,8 +6,8 @@ import { Profile, Strategy } from "passport-facebook";
 export class FacebookStrategy extends PassportStrategy(Strategy, "facebook") {
   constructor() {
     super({
-      clientID: "881471950379451",
-      clientSecret: "e5a147b2a21c41395fe022d086374165",
+      clientID: "347868938167045",
+      clientSecret: "53bc0bab7058589cb368e65d480f27fb",
       callbackURL: "https://nestprueba.onrender.com/facebook/redirect",
       scope: "email",
       profileFields: ["emails", "name"],
