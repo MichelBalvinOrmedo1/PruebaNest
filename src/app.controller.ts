@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, HttpStatus, Req } from "@nestjs/common";
+import { Controller, Get, UseGuards, HttpStatus, Req, HttpException } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { Request } from "express";
 
@@ -36,9 +36,16 @@ export class AppController {
   @Get("/instagram/redirect")
   @UseGuards(AuthGuard("instagram"))
   async instagramLoginRedirect(@Req() req: Request): Promise<any> {
-    return {
-      statusCode: HttpStatus.OK,
-      data: req.user,
-    };
+    try {
+      if (!req.user) {
+        throw new HttpException('User not authenticated', HttpStatus.UNAUTHORIZED);
+      }
+      return {
+        statusCode: HttpStatus.OK,
+        data: req.user,
+      };
+    } catch (error) {
+      throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
