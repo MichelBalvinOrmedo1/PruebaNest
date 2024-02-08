@@ -2,41 +2,38 @@ import { Controller, Get, UseGuards, HttpStatus, Req, HttpException } from "@nes
 import { AuthGuard } from "@nestjs/passport";
 import { Request } from "express";
 
-import { AppService } from "./app.service";
-
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor() {}
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    return 'Hello World!';
   }
 
-  @Get("/facebook")
-  @UseGuards(AuthGuard("facebook"))
-  async facebookLogin(): Promise<any> {
-    return HttpStatus.OK;
-  }
-
-  @Get("/facebook/redirect")
-  @UseGuards(AuthGuard("facebook"))
-  async facebookLoginRedirect(@Req() req: Request): Promise<any> {
-    return {
-      statusCode: HttpStatus.OK,
-      data: req.user,
-    };
-  }
   @Get('instagram')
   @UseGuards(AuthGuard('instagram'))
-  async instagramLogin() {}
+  async instagramLogin() {
+    // Esta ruta maneja la redirección inicial a Instagram para la autorización
+  }
 
   @Get('instagram/callback')
   @UseGuards(AuthGuard('instagram'))
   async instagramLoginCallback(@Req() req: Request) {
-    return {
-      statusCode: 200,
-      data: req.user,
-    };
+    try {
+      // Extrae el código de autorización de la URL
+      const code = req.query.code as string;
+      
+      // Usa el código de autorización para solicitar el token de acceso
+      // y realizar cualquier otra lógica de autenticación necesaria
+      
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Authorization successful',
+        code: code
+      };
+    } catch (error) {
+      throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
