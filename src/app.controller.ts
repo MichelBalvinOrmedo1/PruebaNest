@@ -2,24 +2,21 @@ import { Controller, Get, UseGuards, HttpStatus, Req, HttpException } from "@nes
 import { AuthGuard } from "@nestjs/passport";
 import { Request } from "express";
 
-@Controller()
+@Controller("instagram")
 export class AppController {
   constructor() {}
 
-  @Get()
-  getHello(): string {
-    return 'Hello World!';
-  }
+  
 
-  @Get('instagram')
+  @Get()
   @UseGuards(AuthGuard('instagram'))
   async instagramLogin() {}
 
-  @Get('instagram/callback')
-  @UseGuards(AuthGuard('instagram'))
-  async instagramLoginCallback(@Req() req: Request) {
-    // Lógica para manejar el resultado de la autenticación de Instagram
-    return req.user;
+  @Get('callback')
+  @UseGuards(AuthGuard("instagram"))
+  async instagramCallback(@Req() req: Request) {
+    // El token de acceso está disponible en req.user.accessToken
+    return req.user.accessToken;
   }
 
   
