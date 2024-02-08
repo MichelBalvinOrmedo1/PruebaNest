@@ -27,25 +27,15 @@ export class AppController {
       data: req.user,
     };
   }
-  @Get("/instagram")
-  @UseGuards(AuthGuard("instagram"))
-  async instagramLogin(): Promise<any> {
-    return HttpStatus.OK;
-  }
+  @UseGuards(AuthGuard('instagram'))
+  async instagramLogin() {}
 
-  @Get("/instagram/redirect")
-  @UseGuards(AuthGuard("instagram"))
-  async instagramLoginRedirect(@Req() req: Request): Promise<any> {
-    try {
-      if (!req.user) {
-        throw new HttpException('User not authenticated', HttpStatus.UNAUTHORIZED);
-      }
-      return {
-        statusCode: HttpStatus.OK,
-        data: req.user,
-      };
-    } catch (error) {
-      throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+  @Get('instagram/callback')
+  @UseGuards(AuthGuard('instagram'))
+  async instagramLoginCallback(@Req() req: Request) {
+    return {
+      statusCode: 200,
+      data: req.user,
+    };
   }
 }

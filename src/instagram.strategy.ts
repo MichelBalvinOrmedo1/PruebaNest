@@ -13,23 +13,10 @@ export class InstagramStrategy extends PassportStrategy(Strategy, "instagram") {
     });
   }
 
-  async validate(
-    accessToken: string,
-    refreshToken: string,
-    profile: Profile,
-    done: (err: any, user: any, info?: any) => void
-  ): Promise<any> {
-    const { id, username } = profile;
-    const user = {
-      id,
-      username,
-      // Aquí puedes agregar cualquier otra información del usuario que desees extraer del perfil de Instagram
-    };
-    const payload = {
-      user,
+  async validate(accessToken: string, refreshToken: string, profile: Profile) {
+    return {
       accessToken,
+      user: profile,
     };
-
-    done(null, payload);
   }
 }
