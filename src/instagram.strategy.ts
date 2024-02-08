@@ -9,6 +9,7 @@ export class InstagramStrategy extends PassportStrategy(Strategy, 'instagram') {
       clientID: '751902293045624',
       clientSecret: '00a486c16ebc9243a199f671c0a7affe',
       authorizationURL: 'https://api.instagram.com/oauth/authorize', // URL de autorización de Instagram
+      tokenURL: 'https://api.instagram.com/oauth/access_token',
       callbackURL: 'https://nestprueba.onrender.com/instagram/callback',
 
     });
