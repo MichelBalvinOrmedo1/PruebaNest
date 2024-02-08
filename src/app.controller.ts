@@ -3,6 +3,7 @@ import { AuthGuard } from "@nestjs/passport";
 import { Request } from "express";
 
 import { AppService } from "./app.service";
+import { log } from "console";
 
 @Controller()
 export class AppController {
@@ -34,9 +35,7 @@ export class AppController {
   @Get('instagram/callback')
   @UseGuards(AuthGuard('instagram'))
   async instagramLoginCallback(@Req() req: Request) {
-    return {
-      statusCode: 200,
-      data: req.user,
-    };
+    console.log(req.user);
+    
   }
 }
