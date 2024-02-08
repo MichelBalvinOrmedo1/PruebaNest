@@ -8,7 +8,7 @@ export class InstagramStrategy extends PassportStrategy(Strategy, "instagram") {
     super({
       clientID: "751902293045624",
       clientSecret: "00a486c16ebc9243a199f671c0a7affe",
-      callbackURL: "http://localhost:3000/instagram/redirect",
+      callbackURL: "https://nestprueba.onrender.com/instagram/redirect",
       scope: ["user_profile"],
     });
   }
