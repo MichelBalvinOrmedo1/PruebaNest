@@ -13,10 +13,5 @@ export class InstagramStrategy extends PassportStrategy(Strategy, "instagram") {
     });
   }
 
-  async validate(code: string, profile: Profile) {
-    return {
-      code,
-      user: profile,
-    };
-  }
+  
 }
