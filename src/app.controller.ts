@@ -27,6 +27,7 @@ export class AppController {
       data: req.user,
     };
   }
+  @Get('instagram')
   @UseGuards(AuthGuard('instagram'))
   async instagramLogin() {}
 
