@@ -3,7 +3,6 @@ import { AuthGuard } from "@nestjs/passport";
 import { Request } from "express";
 
 import { AppService } from "./app.service";
-import { log } from "console";
 
 @Controller()
 export class AppController {
@@ -28,11 +27,9 @@ export class AppController {
       data: req.user,
     };
   }
-  @Get("/instagram")
-  @UseGuards(AuthGuard("instagram"))
-  async instagramLogin(): Promise<any> {
-    return HttpStatus.OK;
-  }
+  @Get('instagram')
+  @UseGuards(AuthGuard('instagram'))
+  async instagramLogin() {}
 
   @Get("/instagram/redirect")
   @UseGuards(AuthGuard("instagram"))
@@ -46,7 +43,6 @@ export class AppController {
         data: req.user,
       };
     } catch (error) {
-      console.error('Error during Instagram authentication:', error);
       throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
