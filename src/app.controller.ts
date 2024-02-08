@@ -1,13 +1,11 @@
 import { Controller, Get, Req, Res, UseGuards,HttpStatus} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { FacebookAuthService } from 'facebook-auth-nestjs';
-
 interface AuthenticatedRequest extends Request {
-  user: any; // Define el tipo de 'user' según lo que esperas recibir
-}
+    user: any; // Define el tipo de 'user' según lo que esperas recibir
+  }
 @Controller()
 export class AppController {
-  constructor(private readonly service: FacebookAuthService) { }
+  constructor() {}
 
   @Get()
   getHello(): string {
@@ -28,10 +26,6 @@ export class AppController {
     };
   }
 
-  @Get("face")
-  async getFacebookUser(accessToken: string): Promise<{ id: string, name: string }> {
-    return await this.service.getUser(accessToken, 'id', 'name');
-  }
   @Get('instagram')
   @UseGuards(AuthGuard('instagram'))
   instagramLogin() {}
